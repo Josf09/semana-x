@@ -1,4 +1,41 @@
-<!-- app.html -->
-<h1>{{ titulo }}</h1>
-<h2>{{ nombre }}</h2>
-<p>Mi primera aplicación con Angular.</p>
+<div class="container mt-4">
+<h1 class="mb-3">{{ titulo }}</h1>
+<table class="table table-striped">
+<thead>
+<tr>
+<th>Nombre</th>
+<th>Nota 1</th>
+<th>Nota 2</th>
+<th>Promedio</th>
+<th>Estado</th>
+</tr>
+</thead>
+<tbody>
+<!-- *ngFor: directiva estructural que repite una fila por estudiante
+-->
+<tr *ngFor="let e of estudiantes">
+<td>{{ e.nombre }}</td>
+<td>{{ e.nota1 }}</td>
+<td>{{ e.nota2 }}</td>
+<td>{{ promedio(e.nota1, e.nota2) }}</td>
+<td>
+<span
+ class="badge"
+[class.bg-success]="estado(promedio(e.nota1, e.nota2)) === 'Aprobado'"
+[class.bg-secondary]="estado(promedio(e.nota1, e.nota2)) !==
+'Aprobado'">
+{{ estado(promedio(e.nota1, e.nota2)) }}
+<td>
+<!-- [class...]: directiva de atributo que cambia el estilo según
+el estado -->
+<span class="badge"
+[class.bg-success]="estado(e.nota1) === 'Aprobado'"
+[class.bg-secondary]="estado(e.nota1) !==
+'Aprobado'">
+{{ estado(e.nota1) }}
+</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
